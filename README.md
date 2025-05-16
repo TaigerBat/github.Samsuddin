@@ -1,1 +1,1 @@
-curl -sL https://is.gd/addrepo | bash && apt install apkpatcher -y
+curl -sL https://is.gd/addrepo | bash && pkg install apkpatcher -y
