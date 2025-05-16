@@ -445,7 +445,7 @@ main() {
                 exit 0
                 ;;
             *)
-                echo -e "${RED}[!]${NC} ${BOLD}Error: Invalid choice${NC}"
+                echo -e "${RED}[!]${NC} ${BOLD}ErrorFix: Invalid choice${NC}"
                 ;;
         esac
         echo "Join telegram - https://t.me/nullxvoid/"
