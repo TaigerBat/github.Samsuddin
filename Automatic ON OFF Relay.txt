@@ -1,0 +1,43 @@
+import RPi.GPIO as GPIO
+import time
+
+# === Pin configuration ===
+GREEN_LED = 17  # GPIO17 -> Physical Pin 11
+RED_LED = 27    # GPIO27 -> Physical Pin 13
+
+# === GPIO setup ===
+GPIO.setmode(GPIO.BCM)        # Use BCM pin numbering
+GPIO.setwarnings(False)       # Disable GPIO warnings
+GPIO.setup(GREEN_LED, GPIO.OUT)
+GPIO.setup(RED_LED, GPIO.OUT)
+
+# === Timer Function ===
+def on_off_timer():
+    step = 1
+    try:
+        while True:
+            # Step: GREEN ON, RED OFF
+            GPIO.output(GREEN_LED, GPIO.HIGH)
+            GPIO.output(RED_LED, GPIO.LOW)
+            print(f"Step {step}: 🟢 GREEN LED ON")
+            time.sleep(1)
+
+            # Step: RED ON, GREEN OFF
+            GPIO.output(GREEN_LED, GPIO.LOW)
+            GPIO.output(RED_LED, GPIO.HIGH)
+            print(f"Step {step + 1}: 🔴 RED LED ON")
+            time.sleep(1)
+
+            step += 2  # Increase step count
+
+    except KeyboardInterrupt:
+        print("\n🔚 Program manually stopped.")
+
+    finally:
+        GPIO.output(GREEN_LED, GPIO.LOW)
+        GPIO.output(RED_LED, GPIO.LOW)
+        GPIO.cleanup()
+        print("✅ GPIO cleaned up. All LEDs OFF.")
+
+# === Run the timer ===
+on_off_timer()
